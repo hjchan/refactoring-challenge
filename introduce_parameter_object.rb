@@ -14,12 +14,10 @@ class GamePackageCalculator
 	#calculates the cost of a gamer who wants to get X gold, Y powerup and number of lives derived from X gold and Y powerup. 
 	def calculate_cost(gold, powerups, premium = nil)
 
-		lives = calculate_lives(gold, powerups) 
-		
 		if premium
-			premium_cost(lives, gold, powerups) 
+			premium_cost(gold, powerups) 
 		else
-			basic_cost(lives, gold, powerups)
+			basic_cost(gold, powerups)
 		end
 	end	
 
@@ -31,10 +29,12 @@ class GamePackageCalculator
 
 
 	def premium_cost(lives, gold, powerups)
+    lives = calculate_lives(gold, powerups)
 		PREMIUM_PACKAGE_FACTOR * lives + PREMIUM_RATE * (gold + powerups)
 	end
 
 	def basic_cost(lives, gold, powerups)
+    lives = calculate_lives(gold, powerups)
 		BASIC_PACKAGE_FACTOR * lives + BASIC_RATE * (gold + powerups)
 	end
 
